@@ -1,5 +1,7 @@
-package com.hao.apps.sukoku;
+package com.hao.apps.sudoku;
 
+
+import com.hao.apps.sukoku.R;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;

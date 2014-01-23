@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, Sudoku!</string>
+    <string name="hello">hello sudoku</string>
     
     <string name="app_name">Sudoku</string>
     <string name="main_title">Android Sudoku</string>
@@ -8,7 +8,7 @@
     <string name="new_game_label">New Game</string>
     <string name="about_label">About</string>
     <string name="exit_label">Exit</string>
-    <string name="about_text">毕业纪念</string>
+    <string name="about_text">thank you friends</string>
     <string name="about_title">About Sudoku</string>
     <string name="setting_label">Settings</string>
     <string name="setting_title">Sudoku Settings</string>
@@ -17,9 +17,9 @@
     <string name="music_summary">Play background music</string>
     <string name="hints_title">Hints</string>
     <string name="hints_summary">Show hints during play</string>
-    <string name="easy_label">简单</string>
-    <string name="medium_label">中等</string>
-    <string name="hard_label">困难</string>
+    <string name="easy_label">easy</string>
+    <string name="medium_label">amateur</string>
+    <string name="hard_label">difficult</string>
     <string-array name="diffculty">
         <item>@string/easy_label</item>
         <item>@string/medium_label</item>

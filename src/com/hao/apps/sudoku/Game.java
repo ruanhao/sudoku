@@ -1,4 +1,4 @@
-package com.hao.apps.sukoku;
+package com.hao.apps.sudoku;
 
 import android.app.Activity;
 import android.os.Bundle;

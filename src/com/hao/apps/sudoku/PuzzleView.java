@@ -1,4 +1,6 @@
-package com.hao.apps.sukoku;
+package com.hao.apps.sudoku;
+
+import com.hao.apps.sukoku.R;
 
 import android.content.Context;
 import android.graphics.Canvas;
