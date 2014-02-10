@@ -1,6 +1,6 @@
 package com.hao.apps.sudoku;
 
-import com.hao.apps.sukoku.R;
+import com.hao.apps.sudoku.R;
 
 import android.app.Activity;
 import android.os.Bundle;

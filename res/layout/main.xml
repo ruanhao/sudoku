@@ -1,61 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    
-    android:background="@color/background"
-    android:padding="30dp"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal"
-    >
-    
-    <LinearLayout
-    	android:orientation="vertical"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:layout_gravity="center_vertical"
-    >
-    
-    <TextView  
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="@string/main_title"
-    android:layout_gravity="center"
-    android:layout_marginBottom="25dp"
-    android:textSize="24.5sp"
-    
-    />
-    
-    <Button
-    	android:id="@+id/continue_button"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:text="@string/continue_label"
-    	
-    />
-    
-    <Button
-    	android:id="@+id/new_button"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:text="@string/new_game_label"
-    	
-    />
-    
-    <Button
-    	android:id="@+id/about_button"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:text="@string/about_label"
-    	
-    />
-<Button
-    	android:id="@+id/exit_button"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:text="@string/exit_label"
-    	
-    />    
-    
-    </LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-</LinearLayout>
+	android:id="@+id/relativelayout" android:padding="5dp"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	
+	android:orientation="horizontal">
+	<LinearLayout android:layout_gravity="center_vertical"
+		android:id="@+id/linearLayout1" android:layout_height="wrap_content"
+		android:orientation="vertical" android:layout_width="fill_parent"
+		android:layout_alignParentBottom="true"
+		>
+		<Button android:layout_width="95dp"
+			android:layout_height="wrap_content" android:text="@string/continue_label"
+			android:id="@+id/continue_button"
+			
+			></Button>
+		<Button android:layout_width="95dp"
+			android:layout_height="wrap_content" android:text="@string/new_game_label"
+			android:id="@+id/new_button"></Button>
+		<Button android:layout_width="95dp"
+			android:layout_height="wrap_content" android:text="@string/about_label"
+			android:id="@+id/about_button"></Button>
+		<Button android:layout_width="95dp"
+			android:layout_height="wrap_content" android:text="@string/exit_label"
+			android:id="@+id/exit_button"></Button>
+	</LinearLayout>
+
+</RelativeLayout>

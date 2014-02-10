@@ -1,12 +1,17 @@
 package com.hao.apps.sudoku;
 
-import com.hao.apps.sukoku.R;
+import com.hao.apps.sudoku.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -24,7 +29,23 @@ public class Sudoku extends Activity implements View.OnClickListener {
 		setContentView(R.layout.main);
 		
 		findViews();
+		
 		setButtonListeners();
+		
+		/*GradientDrawable gradient = new GradientDrawable(
+				Orientation.TL_BR,
+				new int[] {Color.argb(50, 251, 183, 166), Color.argb(50, 177, 239, 191)});*/
+		
+		GradientDrawable gradient = new GradientDrawable(
+				Orientation.TL_BR,
+				new int[] {Color.argb(200, 147, 209, 131), Color.argb(200, 240, 182, 176)});
+		
+		//Sudoku.this.getWindow().setBackgroundDrawable(gradient);
+		
+		
+		Drawable back = getResources().getDrawable(R.drawable.dada);
+		
+		Sudoku.this.getWindow().setBackgroundDrawable(back);
 		
 	}
 
@@ -57,7 +78,9 @@ public class Sudoku extends Activity implements View.OnClickListener {
 		// TODO Auto-generated method stub
 		aboutButton.setOnClickListener(this);
 		newButton.setOnClickListener(this);
+		
 		exitButton.setOnClickListener(this);
+		
 		continueButton.setOnClickListener(this);
 	}
 
@@ -65,8 +88,11 @@ public class Sudoku extends Activity implements View.OnClickListener {
 		// TODO Auto-generated method stub
 		aboutButton = (Button) findViewById(R.id.about_button);
 		newButton = (Button) findViewById(R.id.new_button);
+		
 		exitButton = (Button) findViewById(R.id.exit_button);
+		
 		continueButton = (Button) findViewById(R.id.continue_button);
+		
 	}
 
 	Button aboutButton = null;
@@ -74,6 +100,7 @@ public class Sudoku extends Activity implements View.OnClickListener {
 	Button continueButton = null;
 	Button exitButton = null;
 	private static final String TAG = "Sudoku";
+	
 
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -91,6 +118,15 @@ public class Sudoku extends Activity implements View.OnClickListener {
 		case R.id.exit_button:
 			finish();
 			break;
+		case R.id.continue_button:
+			if (getSharedPreferences("PREF", MODE_PRIVATE)
+							.getInt("flag", 3) != 3){
+				Intent intentContinue = new Intent(Sudoku.this, Game.class);
+				intentContinue.putExtra(Game.KEY_DIFFICULTY, Game.CONTINUE_KEY);
+				startActivity(intentContinue);
+			}
+			
+
 		default:
 			break;
 		}
@@ -98,13 +134,18 @@ public class Sudoku extends Activity implements View.OnClickListener {
 
 	private void openNewGameDialog() {
 		// TODO Auto-generated method stub
-		new AlertDialog.Builder(Sudoku.this).setTitle("new game").setItems(
+		/*new AlertDialog.Builder(Sudoku.this).setTitle("开始新游戏！！！！").setItems(
 				R.array.diffculty, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
 						startGame(which);
 					}
-				}).show();
+				}).show();*/
+		
+		String which = Settings.getDiffState(getApplicationContext());
+		Integer i = Integer.parseInt(which);
+		startGame(i);
+		
 	}
 
 	private void startGame(int i) {

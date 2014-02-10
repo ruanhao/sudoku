@@ -3,7 +3,8 @@
 	<CheckBoxPreference android:summary="@string/music_summary"
 		android:title="@string/music_title" android:key="music"
 		android:defaultValue="true"></CheckBoxPreference>
-	<CheckBoxPreference android:summary="@string/hints_summary"
-		android:title="@string/hints_title" android:key="hints"
-		android:defaultValue="true"></CheckBoxPreference>
+	<ListPreference 
+	android:entries="@array/diffculty"
+		android:key="@string/diff_set" android:title="@string/please_diff"
+		android:dialogTitle="@string/donot" android:entryValues="@array/diff_selection" android:id="@+id/listpref"></ListPreference>
 </PreferenceScreen>

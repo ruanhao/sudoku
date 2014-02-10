@@ -1,12 +1,19 @@
 package com.hao.apps.sudoku;
 
-import com.hao.apps.sukoku.R;
+import com.hao.apps.sudoku.R;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
+import android.graphics.Paint.Style;
+
+
 import android.graphics.Rect;
+
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -17,6 +24,10 @@ public class PuzzleView extends View {
 		// TODO Auto-generated constructor stub
 
 		gameReference = (Game) context;
+		
+		
+
+		
 	}
 
 	@Override
@@ -27,89 +38,138 @@ public class PuzzleView extends View {
 		tileWidth = w / 9f;
 		tileHeight = h / 9f;
 
-		selRect = new Rect(0, 0, (int) tileWidth, (int) tileHeight);
+		selRect = new Rect();
 
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO Auto-generated method stub
-		System.out.println("onTouchEvent()");
-
 		super.onTouchEvent(event);
-		
+
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			System.out.println(tileWidth + "" + tileHeight);
-			invalidate();
-			return true;
-			
+			int x = (int) (event.getX() / tileWidth);
+			int y = (int) (event.getY() / tileHeight);
+			select(x, y);
+			if (gameReference.getIsPenUsedFlag() || (gameReference.PEN_STATE_BEFORE_INT == 1)){
+				gameReference.setTestPen(x, y, 1);
+			}
+			gameReference.showKeypad(x, y);
+			break;
 
 		default:
-			return true;
+			break;
 		}
-		
+
+		return true;
 	}
 
-	
-	
-	@Override
-	public void invalidate(Rect dirty) {
-		// TODO Auto-generated method stub
-		System.out.println("before invalidate");
-		super.invalidate(dirty);
-		System.out.println("after invalidate");
-		
+	public void setSelectedTile(int i) {
+		gameReference.setTile(XOfSelection, YOfSelection, i);
+		invalidate();
 	}
 
 	private void select(int x, int y) {
-		System.out.println("invalidate old");
-		//invalidate(selRect);
 		XOfSelection = Math.min(Math.max(x, 0), 8);
 		YOfSelection = Math.min(Math.max(y, 0), 8);
 		getRect(XOfSelection, YOfSelection, selRect);
-		System.out.println("invalidate new");
-		invalidate(selRect);
+		invalidate();
 	}
 
 	private void getRect(int x, int y, Rect rect) {
 		rect.set((int) (x * tileWidth), (int) (y * tileHeight), (int) (x
 				* tileWidth + tileWidth), (int) (y * tileHeight + tileHeight));
-		
+
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
 		// TODO Auto-generated method stub
-		System.out.println("onDraw()");
+
 		super.onDraw(canvas);
 
 		drawBackground(canvas);
 		drawGrids(canvas);
+		drawNumbers(canvas);
+		drawFocusRect(canvas);
+		
+		judgeIfSucceed();
 
+	}
+
+	private void judgeIfSucceed() {
+		// TODO Auto-generated method stub
+		
+		if (gameReference.isSucceed()){
+			
+			new AlertDialog.Builder(gameReference)
+				.setTitle("congradulations")
+				.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+					
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						gameReference.finish();
+					}
+				})
+				.show();
+		}
+	}
+
+	private void drawFocusRect(Canvas canvas) {
+		// TODO Auto-generated method stub
+		Paint paintFocus = new Paint();
+		paintFocus.setColor(getResources().getColor(R.color.puzzle_selected));
+		canvas.drawRect(selRect, paintFocus);
+	}
+
+	public void drawNumbers(Canvas canvas) {
 		Paint numberPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-		numberPaint
-				.setColor(getResources().getColor(R.color.puzzle_foreground));
-		// numberPaint.setStyle(Style.FILL);
+		Paint preNumberPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		
+		
+		preNumberPaint.setColor(Color.BLUE);
+		numberPaint.setStyle(Style.FILL);
 		numberPaint.setTextSize(tileHeight * 0.75f);
+		preNumberPaint.setTextSize(tileHeight * 0.75f);
 		numberPaint.setTextScaleX(tileWidth / tileHeight);
+		preNumberPaint.setTextScaleX(tileWidth / tileHeight);
 		numberPaint.setTextAlign(Paint.Align.CENTER);
+		preNumberPaint.setTextAlign(Paint.Align.CENTER);
+		
+		
 
 		FontMetrics fm = numberPaint.getFontMetrics();
 		float x = tileWidth / 2;
 		float y = tileHeight / 2 - (fm.ascent + fm.descent) / 2;
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				canvas.drawText(
-						PuzzleView.this.gameReference.getTileString(i, j), i
-								* tileWidth + x, j * tileHeight + y,
-						numberPaint);
+				if (PuzzleView.this.gameReference.isInPreDefinedValues(j * 9
+						+ i)) {
+					canvas.drawText(PuzzleView.this.gameReference
+							.getTileString(i, j), i * tileWidth + x, j
+							* tileHeight + y, preNumberPaint);
+				} else {
+					/*
+					 * 下面的if-else语句如果将else中的内容放至FontMetrics fm之前，会有bug在中等难度中出现，请测试
+					 */
+					//System.out.println(gameReference.getIsPenUsedFlag() && (gameReference.getTestPen(i, j) == 1));
+					//System.out.println(i + ", " + j + ": " + gameReference.getTestPen(i, j));
+					if(gameReference.getTestPen(i, j) == 1){
+						numberPaint.setColor(Color.RED);
+						
+					}else{
+						numberPaint
+						.setColor(getResources().getColor(R.color.puzzle_foreground));
+					}
+					
+					canvas.drawText(PuzzleView.this.gameReference
+							.getTileString(i, j), i * tileWidth + x, j
+							* tileHeight + y, numberPaint);
+				}
+
 			}
 		}
-		
-		System.out.println("onDraw() finished");
-		
 	}
 
 	private void drawGrids(Canvas canvas) {
@@ -157,5 +217,9 @@ public class PuzzleView extends View {
 	private int YOfSelection = 0;
 	private Game gameReference = null;
 	private Rect selRect = null;
+	
+	private static final String TAG = "PuzzleView.java";
+	
+	
 
 }

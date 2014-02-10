@@ -10,4 +10,7 @@
     <color name="puzzle_hint_1">#6400ff80</color>
     <color name="puzzle_hint_2">#2000ff80</color>
     <color name="puzzle_selected">#64ff8000</color>
+    <color name="top_color">#EBADAD</color>
+    <color name="bottom_color">#ADEBC6</color>
+    <color name="white_red">#FFB3B3</color>
 </resources>

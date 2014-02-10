@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">hello sudoku</string>
+    <string name="hello">Hello World, Sudoku!</string>
     
-    <string name="app_name">Sudoku</string>
-    <string name="main_title">Android Sudoku</string>
-    <string name="continue_label">Continue</string>
-    <string name="new_game_label">New Game</string>
-    <string name="about_label">About</string>
-    <string name="exit_label">Exit</string>
-    <string name="about_text">thank you friends</string>
-    <string name="about_title">About Sudoku</string>
-    <string name="setting_label">Settings</string>
-    <string name="setting_title">Sudoku Settings</string>
+    <string name="app_name">sudoku</string>
+    <string name="main_title">sudoku</string>
+    <string name="continue_label">continue</string>
+    <string name="new_game_label">new game</string>
+    <string name="about_label">about</string>
+    <string name="exit_label">exit</string>
+    <string name="about_text">v0.1.0</string>
+    <string name="about_title">version</string>
+    <string name="setting_label">setting</string>
+    <string name="setting_title">game setting</string>
     <string name="setting_shortcuts">s</string>
-    <string name="music_title">Music</string>
-    <string name="music_summary">Play background music</string>
-    <string name="hints_title">Hints</string>
-    <string name="hints_summary">Show hints during play</string>
-    <string name="easy_label">easy</string>
+    <string name="music_title">music</string>
+    <string name="music_summary">background music</string>
+    <string name="hints_title">tip</string>
+    <string name="hints_summary">show tip</string>
+    <string name="easy_label">fish</string>
     <string name="medium_label">amateur</string>
-    <string name="hard_label">difficult</string>
+    <string name="hard_label">expert</string>
     <string-array name="diffculty">
         <item>@string/easy_label</item>
         <item>@string/medium_label</item>
@@ -27,6 +27,20 @@
     </string-array>
     <string name="game_title">Game</string>
     <string name="no_moves_label">No moves</string>
-    
-    
+    <string name="wrong">can not touch here</string>
+    <string name="wrong_1">told you do not touch here</string>
+    <string name="wrong_2">do not touch this point, you pig head</string>
+    <string name="wrong_3">&#8230;</string>
+    <string name="keypad_title">select number (tap blank to clear)</string>
+    <string name="test_pen_title">marker</string>
+    <string name="confirm_pen">confirm marker</string>
+    <string name="discard_pen">erase marker</string>
+    <string name="please_diff">choose level</string>
+    <string name="diff_set">difficultySetting</string>
+    <string name="donot">try your best</string>
+    <string-array name="diff_selection">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>
